@@ -2,19 +2,26 @@ $white: #FFFFFF;
 .userRepos{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 70%;
     min-width: 300px;
-    h1{
-        margin: 0 0 30px 0;
+    margin-left: 4vw;
+    h1:first-child{
+        margin: 0 0 1vh 0;
     }
 }
+.reposList::-webkit-scrollbar{
+    height: 0;
+    width: 0;
+}
 .reposList{
+    overflow: scroll;
+    height: 100vh;
+    max-height: 500px;
+    
     .reposBox{
         background-color: $white;
         border-radius: 6px;
         padding: 30px 25px;
-        height: 80px;
     }
     .reposBox:not(:last-child){
         margin-bottom: 25px;
@@ -30,11 +37,14 @@ $white: #FFFFFF;
         padding: 0;
         margin: 0;
     }
-
 }
 @media (max-width:650px){
     .userRepos{
         width: 100%;
         margin: 30px 0 0 0;
+    }
+    .reposList{
+        height: fit-content;
+        overflow: visible;
     }
 }
