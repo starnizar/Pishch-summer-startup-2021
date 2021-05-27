@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import Header from './components/Header/Header'
+import SearchResult from './components/SearchResult/SearchResult'
 function App() {
+  const [user, setUser] = useState([])
+  const [repos, setRepos] = useState([])
+  const [pageNum, setPageNum] = useState(1)
+  const [btnDisable, setBtnDisable] = useState({prevBtnDisable: true, nextBtnDisable: false})
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header setUser={setUser} setRepos={setRepos} setPageNum={setPageNum} setBtnDisable={setBtnDisable}/>
+      <SearchResult user={user} repos={repos} setPageNum={setPageNum} pageNum={pageNum} btnDisable={btnDisable} setBtnDisable={setBtnDisable}/>
     </div>
   );
 }

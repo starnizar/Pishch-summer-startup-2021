@@ -1,0 +1,40 @@
+$white: #FFFFFF;
+.userRepos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    min-width: 300px;
+    h1{
+        margin: 0 0 30px 0;
+    }
+}
+.reposList{
+    .reposBox{
+        background-color: $white;
+        border-radius: 6px;
+        padding: 30px 25px;
+        height: 80px;
+    }
+    .reposBox:not(:last-child){
+        margin-bottom: 25px;
+    }
+    h2{
+        padding: 0;
+        margin: 0 0 15px 0;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 29px;
+    }
+    p{
+        padding: 0;
+        margin: 0;
+    }
+
+}
+@media (max-width:650px){
+    .userRepos{
+        width: 100%;
+        margin: 30px 0 0 0;
+    }
+}

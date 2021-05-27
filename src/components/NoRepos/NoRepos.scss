@@ -1,0 +1,26 @@
+$text: #808080;
+
+.noRepos{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    i{
+        color: $text;
+        font-size: 64px;
+    }
+    p{
+        color: $text;
+        max-width: 210px;
+        font-weight: normal;
+        font-size: 22px;
+        line-height: 140%;
+        text-align: center;
+    }
+}
+@media (max-width:650px){
+    .noRepos{
+        margin-top: 20px;
+    }
+}

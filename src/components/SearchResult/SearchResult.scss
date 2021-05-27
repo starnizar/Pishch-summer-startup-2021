@@ -1,0 +1,16 @@
+$background:#E5E5E5;
+main{
+    display: flex;
+    justify-content: space-between;
+    background-color: $background;
+    height: calc(100vh - 152px);
+    padding: 40px 4vw 20px;
+}
+
+@media (max-width:650px){
+    main{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+}
