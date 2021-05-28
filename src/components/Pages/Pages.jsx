@@ -3,9 +3,8 @@ import './Pages.scss'
 import Void from '../Void/Void'
 import {Octokit} from '@octokit/core'
 
-const octokit = new Octokit({ auth: `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` });
+const octokit = new Octokit({ auth: `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` });
 const Pages = ({user, setRepos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
-    //const[pagesBar, setPagesBar] = useState('')
     const pagesAmount = Math.ceil(user.public_repos/4)
     const pageInpuRef = useRef()
     if(pagesAmount === 1) return <Void/>
