@@ -2,40 +2,53 @@ import {React, useRef, useState} from 'react'
 import './Header.scss'
 import logo from '../assets/images/logo.svg'
 import loader from '../assets/images/loader.svg'
+import {Octokit} from '@octokit/core'
 
-const Header = ({setUser, setRepos, setPageNum, setBtnDisable}) => {
+const octokit = new Octokit({ auth: `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` });
+const Header = ({setUser, setRepos, setPageNum, setBtnDisable, pageNum}) => {
     const [load, setLoad] = useState('none')
     const userInputRef = useRef()
     const getUser = async (event) => {
         event.preventDefault()
-        setLoad('block') 
-        const responseUser = await fetch(`https://api.github.com/users/${userInputRef.current.value}`) 
-        const userInfo = await responseUser.json()
-        if(userInfo.message === 'Not Found'){
-            setLoad('none')
-            setUser('notFound')
+        if (userInputRef.current.value === '') {
+            setUser([])
             setRepos([])
-        } else {
-            const responseRepos = await fetch(userInfo.repos_url)
-            const reposList = await responseRepos.json()
+            return
+        }
+        setLoad('block') 
+        try{
+            const responseUser = await octokit.request('GET /users/{username}', {
+                username: userInputRef.current.value
+            })
+            const responseRepos = await octokit.request('GET /users/{username}/repos', {
+                username: userInputRef.current.value,
+                per_page: 4,
+                page: pageNum
+            })
+            console.log(responseRepos);
             const loading = () => {
                 setLoad('none')
-                setUser(userInfo)
-                setRepos(reposList)
+                setUser(responseUser.data)
+                setRepos(responseRepos.data)
                 setPageNum(1)
                 setBtnDisable({prevBtnDisable: true, nextBtnDisable: false})
             }
             setTimeout(loading, 500)       
+        } catch(e){
+            setLoad('none')
+            setUser('notFound')
+            setRepos([])
         }
+        
     }
     return <header>
         <a href="https://github.com/" rel="noreferrer" target="_blank">
             <img className='logo' src={logo} alt="#" />
         </a>
         
-        <form onSubmit={getUser}>
+        <form onSubmit={getUser} onChange={getUser}>
             <button><i className="fa fa-search"></i></button>
-            <input required ref={userInputRef} placeholder='Enter GitHub username' type="text" /> 
+            <input  required ref={userInputRef} placeholder='Enter GitHub username' type="text" /> 
             <img style={{display:load}} className='loader' src={loader} alt="" />
         </form>
     </header>

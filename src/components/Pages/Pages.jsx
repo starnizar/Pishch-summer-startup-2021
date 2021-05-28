@@ -1,11 +1,14 @@
 import React, {useRef} from 'react'
 import './Pages.scss'
+import Void from '../Void/Void'
+import {Octokit} from '@octokit/core'
 
-const Pages = ({repos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
-    
-    const pagesAmount = Math.ceil(repos.length/3)
+const octokit = new Octokit({ auth: `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` });
+const Pages = ({user, setRepos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
+    //const[pagesBar, setPagesBar] = useState('')
+    const pagesAmount = Math.ceil(user.public_repos/4)
     const pageInpuRef = useRef()
-
+    if(pagesAmount === 1) return <Void/>
     const goTo = (event) => {
         event.preventDefault()
         const inputNum = +pageInpuRef.current.value
@@ -15,40 +18,61 @@ const Pages = ({repos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
             const updateDisable = {prevBtnDisable: true, nextBtnDisable: false}
             setBtnDisable(updateDisable)
             setPageNum(inputNum)
+            updateRepoPage(inputNum)
             pageInpuRef.current.value = ''
         }else if (inputNum === pagesAmount) {
             const updateDisable= {prevBtnDisable: false, nextBtnDisable: true}
             setBtnDisable(updateDisable)
             setPageNum(inputNum)
+            updateRepoPage(inputNum)
             pageInpuRef.current.value = ''
         }else{
             setPageNum(inputNum)
+            updateRepoPage(inputNum)
             pageInpuRef.current.value = ''
         }
     }
-    
+    const updateRepoPage = async (num) => {
+        const responseRepos = await octokit.request('GET /users/{username}/repos', {
+            username: user.login,
+            per_page: 4,
+            page: num
+        })
+        const result = responseRepos.data
+        setRepos(result)
+    }
+
     const nextPage = (event) => {
         event.preventDefault()
         if(pageNum !== pagesAmount-1 || pageNum > pagesAmount-1){
-            setPageNum(pageNum+1)
+            const updatePageNum = pageNum+1
+            setPageNum(updatePageNum)
             const udateDisable = {prevBtnDisable: false, nextBtnDisable: false}
             setBtnDisable(udateDisable)
+            updateRepoPage(updatePageNum)
         } else {
             const updateDisable= {prevBtnDisable: false, nextBtnDisable: true}
             setBtnDisable(updateDisable)
-            setPageNum(pageNum+1)
+            const updatePageNum = pageNum+1
+            setPageNum(updatePageNum)
+            updateRepoPage(updatePageNum)
         }
     }
     const prevPage = (event) => {
         event.preventDefault()
+        
         if(pageNum !== 2 || pageNum < 2){
-            setPageNum(pageNum-1)
+            const updatePageNum = pageNum-1
+            setPageNum(updatePageNum)
             const updateDisable = {prevBtnDisable: false, nextBtnDisable: false}
             setBtnDisable(updateDisable)
+            updateRepoPage(updatePageNum)
         } else{
             const updateDisable = {prevBtnDisable: true, nextBtnDisable: false}
             setBtnDisable(updateDisable)
-            setPageNum(pageNum-1)
+            const updatePageNum = pageNum-1
+            setPageNum(updatePageNum)
+            updateRepoPage(updatePageNum)
         }   
     }
    

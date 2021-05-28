@@ -10,8 +10,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header setUser={setUser} setRepos={setRepos} setPageNum={setPageNum} setBtnDisable={setBtnDisable}/>
-      <SearchResult user={user} repos={repos} setPageNum={setPageNum} pageNum={pageNum} btnDisable={btnDisable} setBtnDisable={setBtnDisable}/>
+      <Header setUser={setUser} setRepos={setRepos} setPageNum={setPageNum} pageNum={pageNum} setBtnDisable={setBtnDisable}/>
+      <SearchResult user={user} repos={repos} setRepos={setRepos} setPageNum={setPageNum} pageNum={pageNum} btnDisable={btnDisable} setBtnDisable={setBtnDisable}/>
     </div>
   );
 }
