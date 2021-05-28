@@ -4,7 +4,7 @@ import logo from '../assets/images/logo.svg'
 import loader from '../assets/images/loader.svg'
 import {Octokit} from '@octokit/core'
 
-const octokit = new Octokit({ auth: `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` });
+const octokit = new Octokit({ auth: `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` });
 const Header = ({setUser, setRepos, setPageNum, setBtnDisable, pageNum}) => {
     const [load, setLoad] = useState('none')
     const userInputRef = useRef()
