@@ -8,9 +8,15 @@ const Pages = ({repos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
 
     const goTo = (event) => {
         event.preventDefault()
-        const inputNum = pageInpuRef.current.value
+        const inputNum = +pageInpuRef.current.value
         if (isNaN(inputNum) || inputNum < 1 || inputNum > pagesAmount){
             return
+        }else if (inputNum === 1){
+            const updateDisable = {prevBtnDisable: true, nextBtnDisable: false}
+            setBtnDisable(updateDisable)
+        }else if (inputNum === pagesAmount) {
+            const updateDisable= {prevBtnDisable: false, nextBtnDisable: true}
+            setBtnDisable(updateDisable)
         }else{
             const toNum = +inputNum
             setPageNum(toNum)
