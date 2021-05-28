@@ -34,7 +34,7 @@ const Header = ({setUser, setRepos, setPageNum, setBtnDisable}) => {
         </a>
         
         <form onSubmit={getUser}>
-            <i className="fa fa-search"></i>
+            <button><i className="fa fa-search"></i></button>
             <input required ref={userInputRef} placeholder='Enter GitHub username' type="text" /> 
             <img style={{display:load}} className='loader' src={loader} alt="" />
         </form>
