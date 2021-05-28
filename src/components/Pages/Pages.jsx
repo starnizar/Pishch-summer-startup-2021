@@ -14,12 +14,15 @@ const Pages = ({repos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
         }else if (inputNum === 1){
             const updateDisable = {prevBtnDisable: true, nextBtnDisable: false}
             setBtnDisable(updateDisable)
+            setPageNum(inputNum)
+            pageInpuRef.current.value = ''
         }else if (inputNum === pagesAmount) {
             const updateDisable= {prevBtnDisable: false, nextBtnDisable: true}
             setBtnDisable(updateDisable)
+            setPageNum(inputNum)
+            pageInpuRef.current.value = ''
         }else{
-            const toNum = +inputNum
-            setPageNum(toNum)
+            setPageNum(inputNum)
             pageInpuRef.current.value = ''
         }
     }
