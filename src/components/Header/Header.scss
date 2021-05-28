@@ -41,7 +41,17 @@ header{
         letter-spacing: 0.01em;
     }
     a{
+        transition: .3s;
         margin-right: 2vw;
+        border-radius: 50%;
+        padding-bottom: -3px;
+    }
+    a:hover{
+        background-color: black;
+        box-shadow: 0 0 10px 2px black;
+    }
+    a:active{
+        box-shadow: 0 0 4px 1px black;
     }
     .loader{
         width: 30px;
