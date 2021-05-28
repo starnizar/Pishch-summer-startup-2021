@@ -5,7 +5,6 @@ import NoRepos from '../NoRepos/NoRepos'
 
 const UserRepos = ({repos, setRepos, user, setPageNum, pageNum, btnDisable, setBtnDisable}) => {
     if(repos.length === 0) return <NoRepos/>
-
     return <div className="userRepos">
         <h1>Repositories ({user.public_repos})</h1>
         <div className="reposList">

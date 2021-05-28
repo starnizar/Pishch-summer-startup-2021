@@ -1,9 +1,7 @@
 import React, {useRef} from 'react'
 import './Pages.scss'
 import Void from '../Void/Void'
-import {Octokit} from '@octokit/core'
 
-const octokit = new Octokit({ auth: `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` });
 const Pages = ({user, setRepos, pageNum, setPageNum, btnDisable, setBtnDisable}) => {
     const pagesAmount = Math.ceil(user.public_repos/4)
     const pageInpuRef = useRef()
@@ -32,12 +30,8 @@ const Pages = ({user, setRepos, pageNum, setPageNum, btnDisable, setBtnDisable})
         }
     }
     const updateRepoPage = async (num) => {
-        const responseRepos = await octokit.request('GET /users/{username}/repos', {
-            username: user.login,
-            per_page: 4,
-            page: num
-        })
-        const result = responseRepos.data
+        const responseRepos = await fetch(`https://api.github.com/users/${user.login}/repos?per_page=4&page=${num}`)
+        const result = await responseRepos.json()
         setRepos(result)
     }
 
