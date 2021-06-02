@@ -8,6 +8,9 @@ const Header = ({setUser, setRepos, setPageNum, setBtnDisable, pageNum}) => {
     const userInputRef = useRef()
     const getUser = async (event) => {
         event.preventDefault()
+        if (userInputRef.current.value.trim() === ''){
+            return
+        }
         setLoad('block') 
         const responseUser = await fetch(`https://api.github.com/users/${userInputRef.current.value}`)
         if(!responseUser.ok) {
