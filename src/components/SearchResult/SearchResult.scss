@@ -1,13 +1,18 @@
 $background:#E5E5E5;
 main{
-    display: flex;
-    justify-content: space-between;
     background-color: $background;
-    padding: 40px 4vw 20px;
+    display: flex;justify-content: center;
+    .searchResult {
+        width: 100%;
+        max-width: 1350px;
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 4vw 20px;
+    }
 }
 
 @media (max-width:650px){
-    main{
+    .searchResult{
         flex-direction: column;
         align-items: center;
         height: auto;

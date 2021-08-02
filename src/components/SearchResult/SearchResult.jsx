@@ -9,8 +9,10 @@ const SearchResult = ({user, repos, setRepos, setPageNum, pageNum, btnDisable, s
     if (user.length === 0 && repos.length === 0) return <StartSearch/>
     if (user === 'notFound') return <NotFound/>
     return <main>
-        <UserInfo user={user}/>
-        <UserRepos user={user} repos={repos} setRepos={setRepos} setPageNum={setPageNum} pageNum={pageNum} setBtnDisable={setBtnDisable} btnDisable={btnDisable}/>
+        <div className={'searchResult'}>
+            <UserInfo user={user}/>
+            <UserRepos user={user} repos={repos} setRepos={setRepos} setPageNum={setPageNum} pageNum={pageNum} setBtnDisable={setBtnDisable} btnDisable={btnDisable}/>
+        </div>
     </main>  
 }
 

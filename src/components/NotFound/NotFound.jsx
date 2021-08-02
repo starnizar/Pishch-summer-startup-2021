@@ -3,7 +3,7 @@ import './NotFound.scss'
 
 const NotFound = () => {
     return <main className='notFound'>
-        <i class="fa fa-user"></i>
+        <i className="fa fa-user"/>
         <p>User not found</p>
     </main>
 }

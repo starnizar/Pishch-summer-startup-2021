@@ -32,15 +32,17 @@ const Header = ({setUser, setRepos, setPageNum, setBtnDisable, pageNum}) => {
         setTimeout(loading, 500)       
     }
     return <header>
-        <a href="https://github.com/" rel="noreferrer" target="_blank">
-            <img className='logo' src={logo} alt="#" />
-        </a>
-        
-        <form onSubmit={getUser}>
-            <button><i className="fa fa-search"></i></button>
-            <input  required ref={userInputRef} placeholder='Enter GitHub username' type="text" /> 
-            <img style={{display:load}} className='loader' src={loader} alt="" />
-        </form>
+        <div className={'contentWrapper'}>
+            <a href="https://github.com/" rel="noreferrer" target="_blank">
+                <img className='logo' src={logo} alt="#" />
+            </a>
+
+            <form onSubmit={getUser}>
+                <button><i className="fa fa-search"/></button>
+                <input  required ref={userInputRef} placeholder='Enter GitHub username' type="text" />
+                <img style={{display:load}} className='loader' src={loader} alt="" />
+            </form>
+        </div>
     </header>
 }
 
